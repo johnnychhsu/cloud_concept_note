@@ -28,4 +28,17 @@ Summary :
 4. Topology-aware
 5. Fast
 
+#### Membership Protocol
+Failure detector. Once a process crash, we should detect it.
+Consider some factors:
+1. Completeness : each failure is detected
+2. Accuracy : there is no mistaken detection
+3. Speed : time till first detection of failure
+4. Scale : equal load on each node (no bottleneck)
+We can't get both. But we can gurantee completeness, and Partial/Probabilistic gurantee accuracy.
 
+#### Centralized Hearbeating
+Each process i send heart beat to one process j periodically. If nor received within a time, mark as fail.
+
+#### All-to-all heartbeating
+Every node send to every node. Gurantee completeness.
