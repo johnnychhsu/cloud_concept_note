@@ -35,6 +35,7 @@ Consider some factors:
 2. Accuracy : there is no mistaken detection
 3. Speed : time till first detection of failure
 4. Scale : equal load on each node (no bottleneck)
+
 We can't get both. But we can gurantee completeness, and Partial/Probabilistic gurantee accuracy.
 
 #### Centralized Hearbeating
