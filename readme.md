@@ -48,6 +48,9 @@ Every node send to every node. Gurantee completeness.
 Each node send their member list to other node in gossip way. Once recieved, update local list according to the received list.Check the counter and decide to update or not. If update, change the local time to a new round.
 If haven't get the heartbeat within a waiting time, say T_fail, wait another more T_clean to delete the process from list. Because other might have the process. If we delete immediately, we might treat it as a new process and add it back. This might be a ping pong between nodes.
 
+#### Grid Applications
+Compare OpenStack and Globus.
+
 #### Some Reference
 ##### SQL at Scale
 https://towardsdatascience.com/sql-at-scale-with-apache-spark-sql-and-dataframes-concepts-architecture-and-examples-c567853a702f
