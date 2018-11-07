@@ -51,6 +51,14 @@ If haven't get the heartbeat within a waiting time, say T_fail, wait another mor
 #### Grid Applications
 Compare OpenStack and Globus.
 
-#### Some Reference
-##### SQL at Scale
+### Week 3
+#### Peer-to-Peer system
+1. Napster : A centralized server groups, many peers. Once a peer want to find a file, send the request to the server, the server will return a list of tuple (ip_addre, port) to indicate where can find the file. 
+
+2. Gnutella : Eliminate the server. TTL (Time To Live) prevent from the message circle around in the network. When the RequestHit node is behind a firewall, althuogh the requester and responder has TCP connection, requestor can't connect to the responder through HTTP GET. Thus can utilize the overlap link, send a push request to transfer the file using the overlap path in the network. 
+Ping, Pong messages to update the neighbor peer list.
+
+### Some Reference
+#### SQL at Scale
 https://towardsdatascience.com/sql-at-scale-with-apache-spark-sql-and-dataframes-concepts-architecture-and-examples-c567853a702f
+
