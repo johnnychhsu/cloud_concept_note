@@ -53,10 +53,42 @@ Compare OpenStack and Globus.
 
 ### Week 3
 #### Peer-to-Peer system
-1. Napster : A centralized server groups, many peers. Once a peer want to find a file, send the request to the server, the server will return a list of tuple (ip_addre, port) to indicate where can find the file. 
+##### All are DHT, distributed hash table.
+1. Napster : 
+    1. A centralized server groups, many peers. 
+    2. Once a peer want to find a file, send the request to the server, the server will return a list of tuple (ip_addre, port) to indicate where can find the file. 
 
-2. Gnutella : Eliminate the server. TTL (Time To Live) prevent from the message circle around in the network. When the RequestHit node is behind a firewall, althuogh the requester and responder has TCP connection, requestor can't connect to the responder through HTTP GET. Thus can utilize the overlap link, send a push request to transfer the file using the overlap path in the network. 
+2. Gnutella : 
+    1. Eliminate the server. TTL (Time To Live) prevent from the message circle around in the network. 
+    2. When the RequestHit node is behind a firewall, althuogh the requester and responder has TCP connection, requestor can't connect to the responder through HTTP GET. Thus can utilize the overlap link, send a push request to transfer the file using the overlap path in the network. 
 Ping, Pong messages to update the neighbor peer list.
+
+3. Chord : Finger table, successor node. O(logN) for searching and insert, query.
+
+4. Pastry : 
+    1. Nodes have id, like Chord using consistant hashing. 
+    2. Routing table based on prefix matching. 
+    3. Early hops are short, later are long, because shorter prefix has closer distance (more candidate, good locality).  
+
+5. Kelips :
+    1. Affinity group, N^1/2 node in a group, each member of the group maintain tuples of (file, who has) pointers. 
+    2. log(1) look up time. Memory cost log(N^1/2). Fits in today's laptop and work station. 
+    3. Gossip membership.
+    4. Time out for file metedata. Need to refresh periodically (heart beat).
+
+##### Let's focus on Chord : 
+
+Failure Tolerance : 
+1. maintain 2log(N) successors suffices to maintain correctness with high probability.
+2. Duplicate file on predecessor also, this also take care of load balance.
+
+Stabilization protocol : When new node join, periodically talk to neighbor to update other nodes finger table.
+Churn : Node constantly join, leave and fail. log(N) hops for looking up.
+
+##### Trade Off
+1. Memory cost
+2. Look up cost
+3. Background bandwidth (refresh look up table)
 
 ### Some Reference
 #### SQL at Scale
