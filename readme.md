@@ -112,6 +112,14 @@ Base class's descructor is like this:
 `virtual ~Base() {}`
 If we have a derived class, and use a base pointer point to derived, like `Base *b = new Derived();` Once we delete b, it will get undefined behavior if the base class's destructor is not virtual.
 
+##### enum
+Usage :
+`
+enum Days {Saturday,Sunday,Tuesday,Wednesday,Thursday,Friday};
+Days day = Saturday;
+if(day == Saturday)
+`
+
 ### Some Reference
 #### SQL at Scale
 https://towardsdatascience.com/sql-at-scale-with-apache-spark-sql-and-dataframes-concepts-architecture-and-examples-c567853a702f
