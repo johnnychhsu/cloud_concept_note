@@ -107,6 +107,10 @@ We can have more than one constructor, each has different argument.
 
 ##### Operator Overloading
 
+##### Virtual Descructor
+Base class's descructor is like this:
+`virtual ~Base() {}`
+If we have a derived class, and use a base pointer point to derived, like `Base *b = new Derived();` Once we delete b, it will get undefined behavior if the base class's destructor is not virtual.
 
 ### Some Reference
 #### SQL at Scale
