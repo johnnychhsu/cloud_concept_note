@@ -93,6 +93,21 @@ Churn : Node constantly join, leave and fail. log(N) hops for looking up.
 2. Look up cost
 3. Background bandwidth (refresh look up table)
 
+### MP1 Notes
+#### C++
+##### Copy Constructor:
+A copy constructor is a member function which initializes an object using another object of the same class. A copy constructor has the following general function prototype:
+`ClassName (const ClassName &old_obj);`
+
+##### Constructor Overloading
+We can have more than one constructor, each has different argument.
+
+##### Constructot Initialization
+`Member(): inited(false), inGroup(false), bFailed(false), nnb(0), heartbeat(0), pingCounter(0), timeOutCounter(0) {}`
+
+##### Operator Overloading
+
+
 ### Some Reference
 #### SQL at Scale
 https://towardsdatascience.com/sql-at-scale-with-apache-spark-sql-and-dataframes-concepts-architecture-and-examples-c567853a702f
