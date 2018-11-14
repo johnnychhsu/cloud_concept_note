@@ -124,3 +124,52 @@ if(day == Saturday)
 #### SQL at Scale
 https://towardsdatascience.com/sql-at-scale-with-apache-spark-sql-and-dataframes-concepts-architecture-and-examples-c567853a702f
 
+### Week 4
+#### Intro
+1. Key-Value store
+Like Distributed hash table.  Example :
+    1. Tweeter ID -> info about tweet
+2. NoSQL
+    1. Not Only SQL. 
+    2. Column-oriented sotre : Fast, don't need to fetch the whole table.
+
+**Why need this?**
+1. Speed
+2. Avoid single point of failure
+3. Low total cost of operation
+4. Scale out
+
+#### Cassandra
+When data size is large, way more faster than MySQL.
+##### Data placement strategies
+1. Simple strategy
+    1. Random partitioner 
+    2. Byte ordered partitioner : Good for range search
+2. Network Topology strategy
+
+##### Write
+1. Always writable (Hinted Handoff mechanism)
+    1. If any repliais down, the coordinator write to other replicas 
+    2. If all down, the coordinator buffer the write
+
+##### Delete
+Don't delete immediately. Add a tombstone into log.  
+Eventually, when compaction encointers a tombstone, it delete the item.
+
+##### Bloom filter
+A Bloom filter is a space-efficient probabilistic data structure. It is used to test whether an element is a member of a set.
+  Usually we consider trade off between time and space. If we can't trade one of them, then we need to consider accuracy.
+
+Suppose m bits, k hash function. Each time insert one item, calculate the k hash function, then set the corresponding bit of m bits.
+`
+bit_map = list() # length m
+for i in k:
+    v = hash_i(item)
+    v = v % 10
+    m[v] = 1
+`
+May cause false positive.
+**Ref** : https://www.jianshu.com/p/8193d7dc8348
+
+##### Suspicious mechanism
+
