@@ -151,6 +151,7 @@ When data size is large, way more faster than MySQL.
 1. Always writable (Hinted Handoff mechanism)
     1. If any repliais down, the coordinator write to other replicas 
     2. If all down, the coordinator buffer the write
+2. Eventually consistency (Weak consistency)
 
 ##### Delete
 Don't delete immediately. Add a tombstone into log.  
@@ -172,4 +173,67 @@ May cause false positive.
 **Ref** : https://www.jianshu.com/p/8193d7dc8348
 
 ##### Suspicious mechanism
+
+##### Consistenct level
+1. Any
+2. All
+3. One
+4. Quorums
+
+#### CAT Theorem
+1. Consistency
+2. Availability
+3. Partion-tolerance
+
+#### Other Consistency Model
+1. Per-Key sequential
+2. CRDTa (Commutative Replicated Data Types)
+3. Red-blue consistency
+
+**Strong Consistency**
+1. Linearizability
+2. Sequential Consistency
+
+#### HBase
+Prefer consistancy than availability compared to Casandra.
+
+#### Summary
+1. Traditional DB works with strong consistency.
+2. Modern systems workload don't need, but need fast (availability).
+
+#### Time and Ordering
+Asynchronous distributed system consists of number of process. Each has its own clock. 
+1. Clock Skew : Relative difference of two clock value
+2. Clock Drift : Relative difference of two clock frequency
+
+**Maximum drift rate**
+Given a max acceptable skew M between any pair of two clocks, need to synchronize at least once per : M / (2\*MDR)
+
+##### Clock Syne Algorithm
+1. Cristian'a Algorithm
+2. NTP (Nerwork Time Protocol)
+    1. Organized in a tree
+    2. Each client is leaf
+    3. Each node sync to its parent
+ 
+**Lamport Timestamp** 
+Do we necessary to sync time? We only need to maintain the causality (Lamport Ordering).
+1. Each process use a counter, init 0.
+2. Each process increase its counter when send or an instruction happens, assign to its timestamp.
+3. A send carry its timestamp.
+4. Once received a send, assign its timestamp to `max(local time, message timestamp)` + 1. 
+5. May exist concurrency.
+
+##### Vector Clock
+1. Process maintain a vector which has length equals number of processes. Record each process's timestamp.
+2. When send message, send its vector also.
+  
+By using this vector clock, we can tell the difference between causality and concurrency.
+
+**Gotchas**
+1. Allowed to increase clock value, but never decrease.
+2. Allowed to increase or decrease speed of clock.
+3. If error too high, take multiple readings and average them.
+
+
 
