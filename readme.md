@@ -236,4 +236,87 @@ By using this vector clock, we can tell the difference between causality and con
 3. If error too high, take multiple readings and average them.
 
 
+### Week 5
+#### Global snapshot
+It is global state.
+1. Process state
+2. Channel state  
+Don't need to sync all, causality is enough.
+
+##### System model
+Record process state and channel state.
+1. N process in system
+2. Two uni-directional channels between each ordered process
+3. Communication channel are FIFO
+4. No failure
+5. All messages arrive intact, no duplicate
+
+Should not interfere normal application.  
+Global state is collected in a distributed manner.  
+All process may initiate a new global state.  
+
+##### Chandy-Lamport algorithm
+1. Cut : time frontier at each process and each channel  
+    1. Consistent cut
+2. Use this concept to prove the algorithm obey causality.
+
+##### Lives and Safty
+1. Liveness : something good will happen eventually
+2. Safty : something bad will never happen
+
+Chandy-Lamport can be used to detect global properties that are stable, where stable means :  
+once true, stay true forever.
+
+
+#### Multicast
+Send to a group of nodes.
+1. FIFO ordering
+2. Causal ordering
+3. Total ordering
+
+##### Implementation
+1. FIFO : Use a vector to record all message order sent by process. If receive number not equals to current order + 1, buffer it.  
+2. Total ordering : A global sequencer. After receive the message from sequencer, deliver.  
+3. Causal ordering : Similar to FIFO, but different updating rule. 
+
+#### Reliable
+Every correct process in the group receive the same set of multicast.
+
+#### Virtual Synchrony
+1. Views : Each process maintain a membershiplist called view. An update to the view is called view change.
+2. The set of multicast delivered in a given view is the same set at all correct process that were in the view.
+3. If not, then the process will be forcibly removed from v at other process.
+4. What happen in a view, stay in a view.
+
+#### Consensus Problem
+A group of servers attampting to : 
+1. Reliable multicast
+2. Membership/Failure detection
+3. Leader Election
+4. Mutual Exclusion 
+  
+Many problems in distributed system is equivalent to consensus.
+
+##### Synchronous System
+1. Message delay
+2. Upper bound on clock drift rate
+3. Max time for each process step
+
+##### Asynchronous System
+**Paxos**
+1. Consensus is impossible to solve in this async system where delays are unbounded.  
+2. But we can do safty and eventual liveness.
+
+
+
+ 
+
+
+
+
+
+
+
+
+
 
